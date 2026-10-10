@@ -8,10 +8,6 @@ urlpatterns = [
     path("wallets/", views.WalletListCreateView.as_view(), name="wallet-list"),
     path("wallets/<int:pk>/", views.WalletDetailView.as_view(), name="wallet-detail"),
     path("transactions/", views.TransactionListCreateView.as_view(), name="transaction-list"),
-    path(
-        "transactions/<int:pk>/",
-        views.TransactionDetailView.as_view(),
-        name="transaction-detail",
-    ),
+    path("transactions/<int:pk>/",views.TransactionDetailView.as_view(),name="transaction-detail",),
     path("summary/", views.SummaryView.as_view(), name="summary"),
 ]

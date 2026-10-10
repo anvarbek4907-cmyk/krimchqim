@@ -25,4 +25,3 @@ class TransactionAdmin(admin.ModelAdmin):
     search_fields = ("description", "user__username", "category__name")
     date_hierarchy = "date"
     list_select_related = ("user", "wallet", "category")
-с

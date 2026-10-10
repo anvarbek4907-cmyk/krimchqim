@@ -5,21 +5,14 @@ from rest_framework.views import APIView
 
 from .models import Category, Transaction, Wallet
 from .permissions import IsActiveUser, IsOwner
-from .serializers import (
-    CategorySerializer,
-    SummaryQuerySerializer,
-    SummaryResponseSerializer,
-    TransactionFilterSerializer,
-    TransactionSerializer,
-    WalletSerializer,
-)
+from .serializers import CategorySerializer,SummaryQuerySerializer,SummaryResponseSerializer,TransactionFilterSerializer,TransactionSerializer,WalletSerializer
+
 
 
 def _is_schema_generation(view):
     return getattr(view, "swagger_fake_view", False)
 
 
-# ------------------------------ Kategoriyalar ------------------------------
 @extend_schema_view(
     get=extend_schema(
         tags=["Kategoriyalar"],
@@ -68,7 +61,6 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
         instance.delete()
 
 
-# -------------------------------- Hamyonlar --------------------------------
 @extend_schema_view(
     get=extend_schema(tags=["Hamyonlar"], summary="Hamyonlar ro'yxati"),
     post=extend_schema(tags=["Hamyonlar"], summary="Hamyon yaratish"),
@@ -103,7 +95,6 @@ class WalletDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Wallet.objects.filter(user=self.request.user)
 
 
-# ------------------------------- Tranzaksiyalar ------------------------------
 @extend_schema_view(
     get=extend_schema(
         tags=["Tranzaksiyalar"],
@@ -159,7 +150,6 @@ class TransactionDetailView(generics.RetrieveUpdateDestroyAPIView):
         TransactionSerializer.delete_instance(instance)
 
 
-# --------------------------------- Statistika --------------------------------
 class SummaryView(APIView):
     permission_classes = [IsActiveUser]
     pagination_class = None
