@@ -67,7 +67,7 @@ class RegisterSerializer(serializers.Serializer):
         return build_auth_payload(instance)
     
 
-    class LoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True, style={"input_type": "password"})
 
