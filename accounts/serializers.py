@@ -115,7 +115,7 @@ class ChangePasswordSerializer(serializers.Serializer):
         user = self.context["request"].user
         user.set_password(self.validated_data["new_password"])
         user.save(update_fields=["password"])
-        # barcha eski refresh tokenlar bekor qilinadi, yangi juftlik beriladi
+        
         for outstanding in OutstandingToken.objects.filter(user=user):
             BlacklistedToken.objects.get_or_create(token=outstanding)
         return issue_tokens(user)

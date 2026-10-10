@@ -5,16 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .serializers import (
-    AuthResponseSerializer,
-    ChangePasswordSerializer,
-    LoginSerializer,
-    LogoutSerializer,
-    ProfileSerializer,
-    RegisterSerializer,
-    TokenPairSerializer,
-    issue_tokens,
-)
+from .serializers import AuthResponseSerializer,ChangePasswordSerializer,LoginSerializer,LogoutSerializer,ProfileSerializer,RegisterSerializer,TokenPairSerializer,issue_tokens,
+
 
 TAG = ["Autentifikatsiya"]
 
