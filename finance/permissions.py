@@ -2,12 +2,8 @@ from rest_framework.permissions import BasePermission
 
 
 class IsOwner(BasePermission):
-    """Obyekt (kategoriya, hamyon, tranzaksiya) faqat o'z egasiga ruxsat etiladi.
+    
 
-    Queryset allaqachon foydalanuvchi bo'yicha filtrlanadi; bu klass ikkinchi
-    himoya qatlami bo'lib, kelajakda queryset noto'g'ri o'zgarib qolsa ham
-    begona ma'lumotga kirishni to'sadi.
-    """
 
     message = "Bu obyekt sizga tegishli emas."
 
@@ -16,7 +12,7 @@ class IsOwner(BasePermission):
 
 
 class IsActiveUser(BasePermission):
-    """Faqat tizimga kirgan va bloklanmagan (is_active) foydalanuvchilar."""
+    
 
     message = "Akkauntingiz faol emas."
 
