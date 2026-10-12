@@ -1,0 +1,20 @@
+$kind: http-request
+name: Hamyonlar ro'yxati
+description: ""
+url: http://127.0.0.1:8000/api/wallets/
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"detail\": \"Invali page.\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0vds}}"
+settings: {}
+order: 9000

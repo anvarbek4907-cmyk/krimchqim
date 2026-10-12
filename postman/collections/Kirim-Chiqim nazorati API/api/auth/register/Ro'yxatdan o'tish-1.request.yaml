@@ -1,0 +1,66 @@
+$kind: http-request
+name: Ro'yxatdan o'tish
+description: ""
+url: http://127.0.0.1:8000//api/auth/register/
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "password": "a7a7a7a7",
+      "password2": "a7a7a7a7",
+      "username": "Bekzodsxs",
+      "email": "striddng@gmail.com",
+      "first_name": "strinwedsg",
+      "last_name": "stridsng"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 150
+        },
+        "email": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "email"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "password": {
+          "type": "string",
+          "minLength": 1
+        },
+        "password2": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "password",
+        "password2",
+        "username"
+      ]
+    }
+auth:
+  type: noauth
+settings: {}
+order: 2000

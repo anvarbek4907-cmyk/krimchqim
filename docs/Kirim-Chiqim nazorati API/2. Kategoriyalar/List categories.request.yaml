@@ -1,0 +1,16 @@
+$kind: http-request
+description: Ro'yxat. `type` bilan filtrlash mumkin.
+url: "{{baseUrl}}/api/categories/?type=expense&page=1"
+method: GET
+queryParams:
+  - key: type
+    value: expense
+    disabled: true
+  - key: page
+    value: "1"
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 3000

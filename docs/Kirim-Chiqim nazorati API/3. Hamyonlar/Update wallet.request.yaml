@@ -1,0 +1,17 @@
+$kind: http-request
+description: Nomni o'zgartirish (balans o'zgarmaydi).
+url: "{{baseUrl}}/api/wallets/{{walletId}}/"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Hamyon (asosiy)"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 4000

@@ -1,0 +1,43 @@
+$kind: http-request
+description: "Filtrlar: type, category, wallet, date_from, date_to, min_amount, max_amount, search, ordering, page, page_size."
+url: "{{baseUrl}}/api/transactions/?type=expense&category={{expenseCategoryId}}&wallet={{walletId}}&date_from=2026-10-01&date_to=2026-10-31&min_amount=1000&max_amount=1000000&search=bozor&ordering=-date&page=1&page_size=20"
+method: GET
+queryParams:
+  - key: type
+    value: expense
+    disabled: true
+  - key: category
+    value: "{{expenseCategoryId}}"
+    disabled: true
+  - key: wallet
+    value: "{{walletId}}"
+    disabled: true
+  - key: date_from
+    value: 2026-10-01
+    disabled: true
+  - key: date_to
+    value: 2026-10-31
+    disabled: true
+  - key: min_amount
+    value: "1000"
+    disabled: true
+  - key: max_amount
+    value: "1000000"
+    disabled: true
+  - key: search
+    value: bozor
+    disabled: true
+  - key: ordering
+    value: -date
+    disabled: true
+  - key: page
+    value: "1"
+    disabled: true
+  - key: page_size
+    value: "20"
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 3000

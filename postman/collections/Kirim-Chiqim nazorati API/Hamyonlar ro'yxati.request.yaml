@@ -1,0 +1,27 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/wallets/?page=4398&page_size=4398
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: page
+    value: "4398"
+    disabled: false
+    description: A page number within the paginated result set.
+    $type: integer
+  - key: page_size
+    value: "4398"
+    disabled: false
+    description: Number of results to return per page.
+    $type: integer
+body:
+  type: file
+  content:
+    src: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0jsm}}"
+settings: {}
+order: 3000

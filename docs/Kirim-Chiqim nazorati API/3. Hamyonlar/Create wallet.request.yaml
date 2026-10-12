@@ -1,0 +1,22 @@
+$kind: http-request
+description: Hamyon yaratish (boshlang'ich balans ixtiyoriy).
+url: "{{baseUrl}}/api/wallets/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Naqd pul",
+      "currency": "UZS",
+      "balance": "100000.00"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201', function () { pm.response.to.have.status(201); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('walletId', json.id);
+    language: text/javascript
+order: 1000

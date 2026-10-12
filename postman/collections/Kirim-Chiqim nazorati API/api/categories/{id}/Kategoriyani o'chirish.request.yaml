@@ -1,0 +1,31 @@
+$kind: http-request
+description: Tranzaksiyasi bor kategoriyani o'chirib bo'lmaydi (400).
+url: "{{baseUrl}}/api/categories/:id/"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Kategoriyani o'chirish.resources/examples
+order: 4000

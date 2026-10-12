@@ -1,0 +1,31 @@
+$kind: http-request
+description: Hamyon bilan birga uning tranzaksiyalari ham o'chadi.
+url: "{{baseUrl}}/api/wallets/:id/"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Hamyonni o'chirish.resources/examples
+order: 4000

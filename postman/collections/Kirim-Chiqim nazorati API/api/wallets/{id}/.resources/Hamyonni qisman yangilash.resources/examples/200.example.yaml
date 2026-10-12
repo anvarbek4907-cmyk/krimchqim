@@ -1,0 +1,67 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/wallets/:id/"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: "4398"
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "currency": "EUR",
+        "balance": "-54978712"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "created_at": "1989-08-21T16:04:01.198Z",
+        "id": 9086,
+        "name": "string",
+        "currency": "USD",
+        "balance": "31.77"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "UZS",
+              "USD",
+              "EUR"
+            ],
+            "description": "* `UZS` - So'm\n* `USD` - Dollar\n* `EUR` - Yevro"
+          },
+          "balance": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$",
+            "description": "Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi."
+          }
+        },
+        "required": [
+          "created_at",
+          "id",
+          "name"
+        ]
+      }
+order: 1000

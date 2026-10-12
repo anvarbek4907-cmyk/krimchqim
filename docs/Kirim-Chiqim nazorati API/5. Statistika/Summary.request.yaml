@@ -1,0 +1,19 @@
+$kind: http-request
+description: Jami kirim, chiqim, balans va kategoriyalar kesimi.
+url: "{{baseUrl}}/api/summary/?date_from=2026-10-01&date_to=2026-10-31&wallet={{walletId}}"
+method: GET
+queryParams:
+  - key: date_from
+    value: 2026-10-01
+    disabled: true
+  - key: date_to
+    value: 2026-10-31
+    disabled: true
+  - key: wallet
+    value: "{{walletId}}"
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 1000

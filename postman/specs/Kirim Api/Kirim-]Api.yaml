@@ -1,0 +1,1779 @@
+openapi: 3.0.0
+info:
+  title: Kirim Api
+  version: 1.0.0
+  description: |-
+    Shaxsiy moliya (kirim va chiqimlar) nazorati uchun REST API.
+
+    **Autentifikatsiya:** `/api/auth/login/` orqali access va refresh token oling va `Authorization: Bearer <access>` headeri bilan yuboring. Access muddati tugasa `/api/auth/refresh/` orqali yangilang. Swagger'da **Authorize** tugmasiga faqat access tokenni kiriting.
+servers:
+  - url: /
+  - url: 'http://127.0.0.1:8000'
+paths:
+  /api/auth/change-password/:
+    post:
+      summary: Parolni almashtirish
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                  refresh:
+                    type: string
+                required:
+                  - access
+                  - refresh
+              example:
+                access: string
+                refresh: string
+      tags:
+        - api
+        - auth
+        - change-password
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                  minLength: 1
+                new_password:
+                  type: string
+                  minLength: 1
+              required:
+                - new_password
+                - old_password
+            example:
+              new_password: string
+              old_password: string
+  /api/auth/login/:
+    post:
+      summary: Kirish (token olish)
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                  refresh:
+                    type: string
+                  user:
+                    type: object
+                    properties: {}
+                    required:
+                      - email
+                      - first_name
+                      - id
+                      - last_name
+                      - username
+                required:
+                  - access
+                  - refresh
+                  - user
+              example:
+                access: string
+                refresh: string
+                user:
+                  email: zelw468@jueLpWyNieGBOhKdLrJpTxEUNOmquxpOH.gf
+                  first_name: string
+                  id: 4892
+                  last_name: string
+                  username: string
+      tags:
+        - api
+        - auth
+        - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                password:
+                  type: string
+                  minLength: 1
+              required:
+                - password
+                - username
+            example:
+              password: string
+              username: string
+  //api/auth/login/:
+    post:
+      summary: Ro'yxatdan o'tish
+      responses: {}
+      tags:
+        - api
+        - auth
+        - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                  maxLength: 150
+                email:
+                  oneOf:
+                    - type: string
+                      format: email
+                    - type: string
+                first_name:
+                  type: string
+                  maxLength: 150
+                last_name:
+                  type: string
+                  maxLength: 150
+                password:
+                  type: string
+                  minLength: 1
+                password2:
+                  type: string
+                  minLength: 1
+              required:
+                - password
+                - password2
+                - username
+            example:
+              password: a7a7a7a7
+              password2: a7a7a7a7
+              username: Bekzodsxss
+              email: striddng@gmail.com
+              first_name: strinwedsg
+              last_name: stridsng
+  /api/auth/logout/:
+    post:
+      summary: Chiqish (refresh tokenni bekor qilish)
+      responses:
+        '204':
+          description: No response body
+      tags:
+        - api
+        - auth
+        - logout
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh:
+                  type: string
+                  minLength: 1
+              required:
+                - refresh
+            example:
+              refresh: string
+  /api/auth/me/:
+    get:
+      summary: Mening profilim
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    oneOf:
+                      - type: string
+                        format: email
+                      - type: string
+                  first_name:
+                    type: string
+                    maxLength: 150
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                  - id
+                  - username
+              example:
+                id: 1506
+                username: string
+                email: string
+                first_name: string
+                last_name: string
+      tags:
+        - api
+        - auth
+        - me
+      security:
+        - BearerAuth: []
+    put:
+      summary: Profilni to'liq yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    oneOf:
+                      - type: string
+                        format: email
+                      - type: string
+                  first_name:
+                    type: string
+                    maxLength: 150
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                  - id
+                  - username
+              example:
+                id: 1506
+                username: string
+                email: string
+                first_name: string
+                last_name: string
+      tags:
+        - api
+        - auth
+        - me
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  oneOf:
+                    - type: string
+                      format: email
+                    - type: string
+                first_name:
+                  type: string
+                  maxLength: 150
+                last_name:
+                  type: string
+                  maxLength: 150
+            example:
+              email: string
+              first_name: string
+              last_name: string
+    patch:
+      summary: Profilni qisman yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    oneOf:
+                      - type: string
+                        format: email
+                      - type: string
+                  first_name:
+                    type: string
+                    maxLength: 150
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                  - id
+                  - username
+              example:
+                id: 1506
+                username: string
+                email: string
+                first_name: string
+                last_name: string
+      tags:
+        - api
+        - auth
+        - me
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  oneOf:
+                    - type: string
+                      format: email
+                    - type: string
+                first_name:
+                  type: string
+                  maxLength: 150
+                last_name:
+                  type: string
+                  maxLength: 150
+            example:
+              email: string
+              first_name: string
+              last_name: string
+  /api/auth/refresh/:
+    post:
+      summary: Access tokenni yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refresh:
+                    type: string
+                required:
+                  - access
+                  - refresh
+              example:
+                access: string
+                refresh: string
+      tags:
+        - api
+        - auth
+        - refresh
+      description: Refresh token orqali yangi access (va yangi refresh) oladi. Eski refresh bekor qilinadi.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh:
+                  type: string
+                  minLength: 1
+              required:
+                - refresh
+            example:
+              refresh: string
+  /api/auth/register/:
+    post:
+      summary: Ro'yxatdan o'tish
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access:
+                    type: string
+                  refresh:
+                    type: string
+                  user:
+                    type: object
+                    properties: {}
+                    required:
+                      - email
+                      - first_name
+                      - id
+                      - last_name
+                      - username
+                required:
+                  - access
+                  - refresh
+                  - user
+              example:
+                access: string
+                refresh: string
+                user:
+                  email: zelw468@jueLpWyNieGBOhKdLrJpTxEUNOmquxpOH.gf
+                  first_name: string
+                  id: 4892
+                  last_name: string
+                  username: string
+      tags:
+        - api
+        - auth
+        - register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                  maxLength: 150
+                email:
+                  oneOf:
+                    - type: string
+                      format: email
+                    - type: string
+                first_name:
+                  type: string
+                  maxLength: 150
+                last_name:
+                  type: string
+                  maxLength: 150
+                password:
+                  type: string
+                  minLength: 1
+                password2:
+                  type: string
+                  minLength: 1
+              required:
+                - password
+                - password2
+                - username
+            example:
+              password: string
+              password2: string
+              username: string
+              email: string
+              first_name: string
+              last_name: string
+  //api/auth/register/:
+    post:
+      summary: Ro'yxatdan o'tish
+      responses: {}
+      tags:
+        - api
+        - auth
+        - register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                  maxLength: 150
+                email:
+                  oneOf:
+                    - type: string
+                      format: email
+                    - type: string
+                first_name:
+                  type: string
+                  maxLength: 150
+                last_name:
+                  type: string
+                  maxLength: 150
+                password:
+                  type: string
+                  minLength: 1
+                password2:
+                  type: string
+                  minLength: 1
+              required:
+                - password
+                - password2
+                - username
+            example:
+              password: a7a7a7a7
+              password2: a7a7a7a7
+              username: Bekzodsxs
+              email: striddng@gmail.com
+              first_name: strinwedsg
+              last_name: stridsng
+  /api/categories/:
+    get:
+      summary: Kategoriyalar ro'yxati
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+          example: 4398
+        - name: page_size
+          in: query
+          required: false
+          description: Number of results to return per page.
+          schema:
+            type: integer
+          example: 4398
+        - name: type
+          in: query
+          required: false
+          description: Tur bo'yicha filtr
+          schema:
+            type: string
+            enum:
+              - expense
+              - income
+          example: income
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=4'
+                    format: uri
+                  previous:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=2'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          maxLength: 100
+                        type:
+                          type: string
+                          enum:
+                            - income
+                            - expense
+                          description: |-
+                            * `income` - Kirim
+                            * `expense` - Chiqim
+                      required:
+                        - created_at
+                        - id
+                        - name
+                        - type
+                required:
+                  - count
+                  - results
+              example:
+                count: 123
+                results:
+                  - created_at: '2024-11-02T03:35:14.181Z'
+                    id: 593
+                    name: string
+                    type: income
+                  - created_at: '1953-05-05T07:47:31.604Z'
+                    id: 8362
+                    name: string
+                    type: expense
+                next: 'http://api.example.org/accounts/?page=4'
+                previous: 'http://api.example.org/accounts/?page=2'
+      tags:
+        - api
+        - categories
+      security:
+        - BearerAuth: []
+    post:
+      summary: Kategoriya yaratish
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  type:
+                    type: string
+                    enum:
+                      - income
+                      - expense
+                    description: |-
+                      * `income` - Kirim
+                      * `expense` - Chiqim
+                required:
+                  - created_at
+                  - id
+                  - name
+                  - type
+              example:
+                created_at: '1969-04-22T23:14:09.869Z'
+                id: 3513
+                name: string
+                type: expense
+      tags:
+        - api
+        - categories
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                type:
+                  type: string
+                  enum:
+                    - income
+                    - expense
+                  description: |-
+                    * `income` - Kirim
+                    * `expense` - Chiqim
+              required:
+                - name
+                - type
+            example:
+              name: string
+              type: income
+  '/api/categories/{id}/':
+    get:
+      summary: Kategoriyani ko'rish
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  type:
+                    type: string
+                    enum:
+                      - income
+                      - expense
+                    description: |-
+                      * `income` - Kirim
+                      * `expense` - Chiqim
+                required:
+                  - created_at
+                  - id
+                  - name
+                  - type
+              example:
+                created_at: '1969-04-22T23:14:09.869Z'
+                id: 3513
+                name: string
+                type: expense
+      tags:
+        - api
+        - categories
+        - '{id}'
+      security:
+        - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 4398
+    put:
+      summary: Kategoriyani to'liq yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  type:
+                    type: string
+                    enum:
+                      - income
+                      - expense
+                    description: |-
+                      * `income` - Kirim
+                      * `expense` - Chiqim
+                required:
+                  - created_at
+                  - id
+                  - name
+                  - type
+              example:
+                created_at: '1969-04-22T23:14:09.869Z'
+                id: 3513
+                name: string
+                type: expense
+      tags:
+        - api
+        - categories
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                type:
+                  type: string
+                  enum:
+                    - income
+                    - expense
+                  description: |-
+                    * `income` - Kirim
+                    * `expense` - Chiqim
+              required:
+                - name
+                - type
+            example:
+              name: string
+              type: income
+    patch:
+      summary: Kategoriyani qisman yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  type:
+                    type: string
+                    enum:
+                      - income
+                      - expense
+                    description: |-
+                      * `income` - Kirim
+                      * `expense` - Chiqim
+                required:
+                  - created_at
+                  - id
+                  - name
+                  - type
+              example:
+                created_at: '1969-04-22T23:14:09.869Z'
+                id: 3513
+                name: string
+                type: expense
+      tags:
+        - api
+        - categories
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                type:
+                  type: string
+                  enum:
+                    - income
+                    - expense
+                  description: |-
+                    * `income` - Kirim
+                    * `expense` - Chiqim
+            example:
+              name: string
+              type: income
+    delete:
+      summary: Kategoriyani o'chirish
+      responses:
+        '204':
+          description: No response body
+      tags:
+        - api
+        - categories
+        - '{id}'
+      security:
+        - BearerAuth: []
+      description: Tranzaksiyasi bor kategoriyani o'chirib bo'lmaydi (400).
+  /api/summary/:
+    get:
+      summary: 'Jami kirim, chiqim va kategoriyalar kesimi'
+      parameters:
+        - name: date_from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '1992-02-10'
+        - name: date_to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '1992-02-10'
+        - name: wallet
+          in: query
+          required: false
+          schema:
+            type: integer
+          example: 4398
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_income:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  total_expense:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  balance:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  transactions_count:
+                    type: integer
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: integer
+                        name:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                            - income
+                            - expense
+                          description: |-
+                            * `income` - Kirim
+                            * `expense` - Chiqim
+                        total:
+                          type: string
+                          pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                        count:
+                          type: integer
+                      required:
+                        - category
+                        - count
+                        - name
+                        - total
+                        - type
+                required:
+                  - balance
+                  - categories
+                  - total_expense
+                  - total_income
+                  - transactions_count
+              example:
+                balance: '53326875242'
+                categories:
+                  - category: 6729
+                    count: 6351
+                    name: string
+                    total: '-802.9'
+                    type: income
+                  - category: 2584
+                    count: 7143
+                    name: string
+                    total: '14003842435'
+                    type: expense
+                total_expense: '-634.02'
+                total_income: '-.79'
+                transactions_count: 6067
+      tags:
+        - api
+        - summary
+      security:
+        - BearerAuth: []
+  /api/transactions/:
+    get:
+      summary: 'Kirim-chiqimlar ro''yxati (filtr, qidiruv, tartiblash)'
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: integer
+          example: 4398
+        - name: date_from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '1992-02-10'
+        - name: date_to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '1992-02-10'
+        - name: max_amount
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+          example: '-49046463819.'
+        - name: min_amount
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+          example: '-49046463819.'
+        - name: ordering
+          in: query
+          required: false
+          description: |-
+            * `date` - date
+            * `-date` - -date
+            * `amount` - amount
+            * `-amount` - -amount
+            * `created_at` - created_at
+            * `-created_at` - -created_at
+          schema:
+            type: string
+            enum:
+              - date
+              - '-date'
+              - amount
+              - '-amount'
+              - created_at
+              - '-created_at'
+            minLength: 1
+          example: '-created_at'
+        - name: page
+          in: query
+          required: false
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+          example: 4398
+        - name: page_size
+          in: query
+          required: false
+          description: Number of results to return per page.
+          schema:
+            type: integer
+          example: 4398
+        - name: search
+          in: query
+          required: false
+          description: Izoh bo'yicha qidirish
+          schema:
+            type: string
+            minLength: 1
+          example: string
+        - name: type
+          in: query
+          required: false
+          description: |-
+            * `income` - Kirim
+            * `expense` - Chiqim
+          schema:
+            type: string
+            enum:
+              - income
+              - expense
+            minLength: 1
+          example: expense
+        - name: wallet
+          in: query
+          required: false
+          schema:
+            type: integer
+          example: 4398
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=4'
+                    format: uri
+                  previous:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=2'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        wallet:
+                          type: integer
+                        category:
+                          type: integer
+                        amount:
+                          type: string
+                          pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                        description:
+                          type: string
+                          maxLength: 255
+                        date:
+                          type: string
+                          description: Berilmasa bugungi sana olinadi.
+                          format: date
+                      required:
+                        - amount
+                        - category
+                        - category_name
+                        - created_at
+                        - id
+                        - type
+                        - wallet
+                        - wallet_name
+                required:
+                  - count
+                  - results
+              example:
+                count: 123
+                results:
+                  - amount: '93.'
+                    category: 4379
+                    category_name: string
+                    created_at: '1946-10-20T18:46:11.673Z'
+                    id: 7327
+                    type: string
+                    wallet: 9435
+                    wallet_name: string
+                    description: string
+                    date: '1961-04-17'
+                  - amount: '-6248'
+                    category: 5107
+                    category_name: string
+                    created_at: '1997-02-11T09:17:45.528Z'
+                    id: 1344
+                    type: string
+                    wallet: 9065
+                    wallet_name: string
+                    description: string
+                    date: '1985-05-03'
+                next: 'http://api.example.org/accounts/?page=4'
+                previous: 'http://api.example.org/accounts/?page=2'
+      tags:
+        - api
+        - transactions
+      security:
+        - BearerAuth: []
+    post:
+      summary: Kirim yoki chiqim qo'shish
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet:
+                    type: integer
+                  category:
+                    type: integer
+                  amount:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description:
+                    type: string
+                    maxLength: 255
+                  date:
+                    type: string
+                    description: Berilmasa bugungi sana olinadi.
+                    format: date
+                required:
+                  - amount
+                  - category
+                  - category_name
+                  - created_at
+                  - id
+                  - type
+                  - wallet
+                  - wallet_name
+              example:
+                amount: '905706.'
+                category: 3687
+                category_name: string
+                created_at: '1951-01-05T05:39:59.398Z'
+                id: 2819
+                type: string
+                wallet: 5692
+                wallet_name: string
+                description: string
+                date: '1946-11-20'
+      tags:
+        - api
+        - transactions
+      security:
+        - BearerAuth: []
+      description: Turi (kirim/chiqim) tanlangan **kategoriya** turidan olinadi. Hamyon balansi avtomatik o'zgaradi; chiqim balansdan oshsa 400 qaytadi.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet:
+                  type: integer
+                category:
+                  type: integer
+                amount:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                description:
+                  type: string
+                  maxLength: 255
+                date:
+                  type: string
+                  description: Berilmasa bugungi sana olinadi.
+                  format: date
+              required:
+                - amount
+                - category
+                - wallet
+            example:
+              amount: '-918'
+              category: 8529
+              wallet: 7379
+              description: string
+              date: '2019-09-19'
+  '/api/transactions/{id}/':
+    get:
+      summary: Tranzaksiyani ko'rish
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet:
+                    type: integer
+                  category:
+                    type: integer
+                  amount:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description:
+                    type: string
+                    maxLength: 255
+                  date:
+                    type: string
+                    description: Berilmasa bugungi sana olinadi.
+                    format: date
+                required:
+                  - amount
+                  - category
+                  - category_name
+                  - created_at
+                  - id
+                  - type
+                  - wallet
+                  - wallet_name
+              example:
+                amount: '905706.'
+                category: 3687
+                category_name: string
+                created_at: '1951-01-05T05:39:59.398Z'
+                id: 2819
+                type: string
+                wallet: 5692
+                wallet_name: string
+                description: string
+                date: '1946-11-20'
+      tags:
+        - api
+        - transactions
+        - '{id}'
+      security:
+        - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 4398
+    put:
+      summary: Tranzaksiyani to'liq yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet:
+                    type: integer
+                  category:
+                    type: integer
+                  amount:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description:
+                    type: string
+                    maxLength: 255
+                  date:
+                    type: string
+                    description: Berilmasa bugungi sana olinadi.
+                    format: date
+                required:
+                  - amount
+                  - category
+                  - category_name
+                  - created_at
+                  - id
+                  - type
+                  - wallet
+                  - wallet_name
+              example:
+                amount: '905706.'
+                category: 3687
+                category_name: string
+                created_at: '1951-01-05T05:39:59.398Z'
+                id: 2819
+                type: string
+                wallet: 5692
+                wallet_name: string
+                description: string
+                date: '1946-11-20'
+      tags:
+        - api
+        - transactions
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet:
+                  type: integer
+                category:
+                  type: integer
+                amount:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                description:
+                  type: string
+                  maxLength: 255
+                date:
+                  type: string
+                  description: Berilmasa bugungi sana olinadi.
+                  format: date
+              required:
+                - amount
+                - category
+                - wallet
+            example:
+              amount: '-918'
+              category: 8529
+              wallet: 7379
+              description: string
+              date: '2019-09-19'
+    patch:
+      summary: Tranzaksiyani qisman yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet:
+                    type: integer
+                  category:
+                    type: integer
+                  amount:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description:
+                    type: string
+                    maxLength: 255
+                  date:
+                    type: string
+                    description: Berilmasa bugungi sana olinadi.
+                    format: date
+                required:
+                  - amount
+                  - category
+                  - category_name
+                  - created_at
+                  - id
+                  - type
+                  - wallet
+                  - wallet_name
+              example:
+                amount: '905706.'
+                category: 3687
+                category_name: string
+                created_at: '1951-01-05T05:39:59.398Z'
+                id: 2819
+                type: string
+                wallet: 5692
+                wallet_name: string
+                description: string
+                date: '1946-11-20'
+      tags:
+        - api
+        - transactions
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet:
+                  type: integer
+                category:
+                  type: integer
+                amount:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                description:
+                  type: string
+                  maxLength: 255
+                date:
+                  type: string
+                  description: Berilmasa bugungi sana olinadi.
+                  format: date
+            example:
+              wallet: 9809
+              category: 6981
+              amount: '758474314160.6'
+              description: string
+              date: '1971-08-24'
+    delete:
+      summary: Tranzaksiyani o'chirish
+      responses:
+        '204':
+          description: No response body
+      tags:
+        - api
+        - transactions
+        - '{id}'
+      security:
+        - BearerAuth: []
+      description: Hamyon balansi avtomatik qaytariladi.
+  /api/wallets/:
+    get:
+      summary: Hamyonlar ro'yxati
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+          example: 4398
+        - name: page_size
+          in: query
+          required: false
+          description: Number of results to return per page.
+          schema:
+            type: integer
+          example: 4398
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=4'
+                    format: uri
+                  previous:
+                    type: string
+                    example: 'http://api.example.org/accounts/?page=2'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          maxLength: 100
+                        currency:
+                          type: string
+                          enum:
+                            - UZS
+                            - USD
+                            - EUR
+                          description: |-
+                            * `UZS` - So'm
+                            * `USD` - Dollar
+                            * `EUR` - Yevro
+                        balance:
+                          type: string
+                          pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                          description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+                      required:
+                        - created_at
+                        - id
+                        - name
+                required:
+                  - count
+                  - results
+              example:
+                count: 123
+                results:
+                  - created_at: '1961-07-28T21:52:16.796Z'
+                    id: 1100
+                    name: string
+                    currency: USD
+                    balance: '-7268.'
+                  - created_at: '2015-03-20T19:14:29.446Z'
+                    id: 5814
+                    name: string
+                    currency: EUR
+                    balance: 06641981
+                next: 'http://api.example.org/accounts/?page=4'
+                previous: 'http://api.example.org/accounts/?page=2'
+      tags:
+        - api
+        - wallets
+      security:
+        - BearerAuth: []
+    post:
+      summary: Hamyon yaratish
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  currency:
+                    type: string
+                    enum:
+                      - UZS
+                      - USD
+                      - EUR
+                    description: |-
+                      * `UZS` - So'm
+                      * `USD` - Dollar
+                      * `EUR` - Yevro
+                  balance:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                    description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+                required:
+                  - created_at
+                  - id
+                  - name
+              example:
+                created_at: '1989-08-21T16:04:01.198Z'
+                id: 9086
+                name: string
+                currency: USD
+                balance: '31.77'
+      tags:
+        - api
+        - wallets
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                currency:
+                  type: string
+                  enum:
+                    - UZS
+                    - USD
+                    - EUR
+                  description: |-
+                    * `UZS` - So'm
+                    * `USD` - Dollar
+                    * `EUR` - Yevro
+                balance:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+              required:
+                - name
+            example:
+              name: string
+              currency: EUR
+              balance: '1448127638.'
+  '/api/wallets/{id}/':
+    get:
+      summary: Hamyonni ko'rish
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  currency:
+                    type: string
+                    enum:
+                      - UZS
+                      - USD
+                      - EUR
+                    description: |-
+                      * `UZS` - So'm
+                      * `USD` - Dollar
+                      * `EUR` - Yevro
+                  balance:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                    description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+                required:
+                  - created_at
+                  - id
+                  - name
+              example:
+                created_at: '1989-08-21T16:04:01.198Z'
+                id: 9086
+                name: string
+                currency: USD
+                balance: '31.77'
+      tags:
+        - api
+        - wallets
+        - '{id}'
+      security:
+        - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 4398
+    put:
+      summary: Hamyonni to'liq yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  currency:
+                    type: string
+                    enum:
+                      - UZS
+                      - USD
+                      - EUR
+                    description: |-
+                      * `UZS` - So'm
+                      * `USD` - Dollar
+                      * `EUR` - Yevro
+                  balance:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                    description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+                required:
+                  - created_at
+                  - id
+                  - name
+              example:
+                created_at: '1989-08-21T16:04:01.198Z'
+                id: 9086
+                name: string
+                currency: USD
+                balance: '31.77'
+      tags:
+        - api
+        - wallets
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                currency:
+                  type: string
+                  enum:
+                    - UZS
+                    - USD
+                    - EUR
+                  description: |-
+                    * `UZS` - So'm
+                    * `USD` - Dollar
+                    * `EUR` - Yevro
+                balance:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+              required:
+                - name
+            example:
+              name: string
+              currency: EUR
+              balance: '1448127638.'
+    patch:
+      summary: Hamyonni qisman yangilash
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 100
+                  currency:
+                    type: string
+                    enum:
+                      - UZS
+                      - USD
+                      - EUR
+                    description: |-
+                      * `UZS` - So'm
+                      * `USD` - Dollar
+                      * `EUR` - Yevro
+                  balance:
+                    type: string
+                    pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                    description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+                required:
+                  - created_at
+                  - id
+                  - name
+              example:
+                created_at: '1989-08-21T16:04:01.198Z'
+                id: 9086
+                name: string
+                currency: USD
+                balance: '31.77'
+      tags:
+        - api
+        - wallets
+        - '{id}'
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                currency:
+                  type: string
+                  enum:
+                    - UZS
+                    - USD
+                    - EUR
+                  description: |-
+                    * `UZS` - So'm
+                    * `USD` - Dollar
+                    * `EUR` - Yevro
+                balance:
+                  type: string
+                  pattern: '^-?\d{0,12}(?:\.\d{0,2})?$'
+                  description: Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi.
+            example:
+              name: string
+              currency: EUR
+              balance: '-54978712'
+    delete:
+      summary: Hamyonni o'chirish
+      responses:
+        '204':
+          description: No response body
+      tags:
+        - api
+        - wallets
+        - '{id}'
+      security:
+        - BearerAuth: []
+      description: Hamyon bilan birga uning tranzaksiyalari ham o'chadi.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

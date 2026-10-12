@@ -1,0 +1,28 @@
+$kind: http-request
+description: Yangi foydalanuvchi yaratadi va token qaytaradi.
+url: "{{baseUrl}}/api/auth/register/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "ali",
+      "email": "ali@example.com",
+      "first_name": "Ali",
+      "last_name": "Valiyev",
+      "password": "Str0ng-pass-123",
+      "password2": "Str0ng-pass-123"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201', function () { pm.response.to.have.status(201); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('access', json.access);
+      pm.collectionVariables.set('refresh', json.refresh);
+    language: text/javascript
+order: 1000

@@ -1,0 +1,24 @@
+$kind: http-request
+description: Username/parol bilan access va refresh token oladi. Ikkalasi avtomatik saqlanadi.
+url: "{{baseUrl}}/api/auth/login/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "ali",
+      "password": "Str0ng-pass-123"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200', function () { pm.response.to.have.status(200); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('access', json.access);
+      pm.collectionVariables.set('refresh', json.refresh);
+    language: text/javascript
+order: 2000

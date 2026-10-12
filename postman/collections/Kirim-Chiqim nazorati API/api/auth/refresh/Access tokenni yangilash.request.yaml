@@ -1,0 +1,29 @@
+$kind: http-request
+description: Refresh token orqali yangi access (va yangi refresh) oladi. Eski refresh bekor qilinadi.
+url: "{{baseUrl}}/api/auth/refresh/"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "refresh": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "refresh": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "refresh"
+      ]
+    }
+settings: {}
+examples: ./.resources/Access tokenni yangilash.resources/examples
+order: 1000

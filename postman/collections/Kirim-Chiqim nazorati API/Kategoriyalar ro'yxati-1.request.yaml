@@ -1,0 +1,28 @@
+$kind: http-request
+name: Kategoriyalar ro'yxati
+description: ""
+url: http://127.0.0.1:8000/api/categories/
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"token_type\": \"{{json_web_token_0vds}}\",\r
+
+    \  \"exp\": 1791815269,\r
+
+    \  \"iat\": 1791813469,\r
+
+    \  \"jti\": \"6b8a45ef8acf461e84bbf1b8cacb90ac\",\r
+
+    \  \"user_id\": \"4\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0vds}}"
+settings: {}
+order: 10000

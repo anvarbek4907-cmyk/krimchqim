@@ -1,0 +1,17 @@
+$kind: http-request
+description: Profilni qisman yangilash.
+url: "{{baseUrl}}/api/auth/me/"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "first_name": "Aliakbar"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 5000

@@ -1,0 +1,15 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/auth/me/
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0vds}}"
+settings: {}
+order: 14000

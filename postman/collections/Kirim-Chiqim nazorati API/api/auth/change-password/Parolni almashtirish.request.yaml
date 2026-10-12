@@ -1,0 +1,39 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/auth/change-password/"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "new_password": "string",
+      "old_password": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "old_password": {
+          "type": "string",
+          "minLength": 1
+        },
+        "new_password": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "new_password",
+        "old_password"
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Parolni almashtirish.resources/examples
+order: 1000

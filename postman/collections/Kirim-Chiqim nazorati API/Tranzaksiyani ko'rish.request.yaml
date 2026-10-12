@@ -1,0 +1,30 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/transactions/:id/
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "4398"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+order: 12000

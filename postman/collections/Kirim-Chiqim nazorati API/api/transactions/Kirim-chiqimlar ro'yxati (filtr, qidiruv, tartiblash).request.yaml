@@ -1,0 +1,155 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/transactions/?category=4398&date_from=1992-02-10&date_to=1992-02-10&max_amount=-49046463819.&min_amount=-49046463819.&ordering=-created_at&page=4398&page_size=4398&search=string&type=expense&wallet=4398"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: category
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: integer
+  - key: date_from
+    value: 1992-02-10
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+  - key: date_to
+    value: 1992-02-10
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+  - key: max_amount
+    value: "-49046463819."
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          }
+        }
+      }
+  - key: min_amount
+    value: "-49046463819."
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          }
+        }
+      }
+  - key: ordering
+    value: -created_at
+    disabled: false
+    description: |-
+      * `date` - date
+      * `-date` - -date
+      * `amount` - amount
+      * `-amount` - -amount
+      * `created_at` - created_at
+      * `-created_at` - -created_at
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "date",
+              "-date",
+              "amount",
+              "-amount",
+              "created_at",
+              "-created_at"
+            ],
+            "minLength": 1
+          }
+        }
+      }
+  - key: page
+    value: "4398"
+    disabled: false
+    description: A page number within the paginated result set.
+    $type: integer
+  - key: page_size
+    value: "4398"
+    disabled: false
+    description: Number of results to return per page.
+    $type: integer
+  - key: search
+    value: string
+    disabled: false
+    description: Izoh bo'yicha qidirish
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+  - key: type
+    value: expense
+    disabled: false
+    description: |-
+      * `income` - Kirim
+      * `expense` - Chiqim
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "income",
+              "expense"
+            ],
+            "minLength": 1
+          }
+        }
+      }
+  - key: wallet
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: integer
+body:
+  type: text
+  content: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Kirim-chiqimlar ro'yxati (filtr, qidiruv, tartiblash).resources/examples
+order: 1000

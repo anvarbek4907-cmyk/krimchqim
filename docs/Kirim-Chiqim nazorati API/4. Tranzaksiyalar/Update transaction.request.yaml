@@ -1,0 +1,17 @@
+$kind: http-request
+description: Summani o'zgartirish (balans qayta hisoblanadi).
+url: "{{baseUrl}}/api/transactions/{{transactionId}}/"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "amount": "80000.00"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 5000

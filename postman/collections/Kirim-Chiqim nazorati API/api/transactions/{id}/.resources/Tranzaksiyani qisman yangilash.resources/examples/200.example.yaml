@@ -1,0 +1,80 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/transactions/:id/"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: "4398"
+  body:
+    type: json
+    content: |-
+      {
+        "wallet": 9809,
+        "category": 6981,
+        "amount": "758474314160.6",
+        "description": "string",
+        "date": "1971-08-24"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "amount": "905706.",
+        "category": 3687,
+        "category_name": "string",
+        "created_at": "1951-01-05T05:39:59.398Z",
+        "id": 2819,
+        "type": "string",
+        "wallet": 5692,
+        "wallet_name": "string",
+        "description": "string",
+        "date": "1946-11-20"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "wallet": {
+            "type": "integer"
+          },
+          "category": {
+            "type": "integer"
+          },
+          "amount": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "date": {
+            "type": "string",
+            "description": "Berilmasa bugungi sana olinadi.",
+            "format": "date"
+          }
+        },
+        "required": [
+          "amount",
+          "category",
+          "category_name",
+          "created_at",
+          "id",
+          "type",
+          "wallet",
+          "wallet_name"
+        ]
+      }
+order: 1000

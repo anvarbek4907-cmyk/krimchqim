@@ -1,0 +1,19 @@
+workspace:
+  id: 66e0b85f-7e75-4535-8dcc-f50bee4e1057
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections: {}
+
+localResources:
+  collections:
+    - ../docs/Kirim-Chiqim nazorati API
+  specs:
+    - ../schema.yml
+    - ../postman/specs/Kirim-Chiqim nazorati API/schema.yml
+    - ../postman/specs/Kirim Api/Kirim-]Api.yaml
+resourceNameMappings:
+  specs:
+    - ../postman/specs/Kirim-Chiqim nazorati API/schema.yml: Kirim-Chiqim nazorati API
+    - ../postman/specs/Kirim Api/Kirim-]Api.yaml: Kirim Api

@@ -1,0 +1,57 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/summary/?date_from=1992-02-10&date_to=1992-02-10&wallet=4398
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: date_from
+    value: 1992-02-10
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+  - key: date_to
+    value: 1992-02-10
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+  - key: wallet
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: integer
+body:
+  type: json
+  content: "{\r
+
+    \    \"wallet\": [\r
+
+    \        4398\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0x0d}}"
+settings: {}
+order: 6000

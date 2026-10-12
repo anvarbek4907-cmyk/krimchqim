@@ -1,0 +1,21 @@
+$kind: http-request
+description: Chiqim kategoriyasi yaratish.
+url: "{{baseUrl}}/api/categories/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Oziq-ovqat",
+      "type": "expense"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201', function () { pm.response.to.have.status(201); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('expenseCategoryId', json.id);
+    language: text/javascript
+order: 2000

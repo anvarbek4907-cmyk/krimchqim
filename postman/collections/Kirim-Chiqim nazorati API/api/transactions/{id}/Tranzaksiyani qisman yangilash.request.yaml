@@ -1,0 +1,66 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/transactions/:id/"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "4398"
+    disabled: false
+    description: ""
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "wallet": 9809,
+      "category": 6981,
+      "amount": "758474314160.6",
+      "description": "string",
+      "date": "1971-08-24"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "wallet": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "integer"
+        },
+        "amount": {
+          "type": "string",
+          "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "date": {
+          "type": "string",
+          "description": "Berilmasa bugungi sana olinadi.",
+          "format": "date"
+        }
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Tranzaksiyani qisman yangilash.resources/examples
+order: 3000

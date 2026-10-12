@@ -1,0 +1,23 @@
+$kind: http-request
+description: Access muddati (30 daqiqa) tugaganda yangi access va yangi refresh oladi. Eski refresh bekor bo'ladi.
+url: "{{baseUrl}}/api/auth/refresh/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "refresh": "{{refresh}}"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 200', function () { pm.response.to.have.status(200); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('access', json.access);
+      pm.collectionVariables.set('refresh', json.refresh);
+    language: text/javascript
+order: 3000

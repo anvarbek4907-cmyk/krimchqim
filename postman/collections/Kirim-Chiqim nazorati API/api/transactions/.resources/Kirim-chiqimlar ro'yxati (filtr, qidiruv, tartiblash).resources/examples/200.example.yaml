@@ -1,0 +1,167 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/transactions/?category=4398&date_from=1992-02-10&date_to=1992-02-10&max_amount=-49046463819.&min_amount=-49046463819.&ordering=-created_at&page=4398&page_size=4398&search=string&type=expense&wallet=4398"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    - key: category
+      value: "4398"
+      disabled: false
+      description: ""
+    - key: date_from
+      value: 1992-02-10
+      disabled: false
+      description: ""
+    - key: date_to
+      value: 1992-02-10
+      disabled: false
+      description: ""
+    - key: max_amount
+      value: "-49046463819."
+      disabled: false
+      description: ""
+    - key: min_amount
+      value: "-49046463819."
+      disabled: false
+      description: ""
+    - key: ordering
+      value: -created_at
+      disabled: false
+      description: |-
+        * `date` - date
+        * `-date` - -date
+        * `amount` - amount
+        * `-amount` - -amount
+        * `created_at` - created_at
+        * `-created_at` - -created_at
+    - key: page
+      value: "4398"
+      disabled: false
+      description: A page number within the paginated result set.
+    - key: page_size
+      value: "4398"
+      disabled: false
+      description: Number of results to return per page.
+    - key: search
+      value: string
+      disabled: false
+      description: Izoh bo'yicha qidirish
+    - key: type
+      value: expense
+      disabled: false
+      description: |-
+        * `income` - Kirim
+        * `expense` - Chiqim
+    - key: wallet
+      value: "4398"
+      disabled: false
+      description: ""
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "count": 123,
+        "results": [
+          {
+            "amount": "93.",
+            "category": 4379,
+            "category_name": "string",
+            "created_at": "1946-10-20T18:46:11.673Z",
+            "id": 7327,
+            "type": "string",
+            "wallet": 9435,
+            "wallet_name": "string",
+            "description": "string",
+            "date": "1961-04-17"
+          },
+          {
+            "amount": "-6248",
+            "category": 5107,
+            "category_name": "string",
+            "created_at": "1997-02-11T09:17:45.528Z",
+            "id": 1344,
+            "type": "string",
+            "wallet": 9065,
+            "wallet_name": "string",
+            "description": "string",
+            "date": "1985-05-03"
+          }
+        ],
+        "next": "http://api.example.org/accounts/?page=4",
+        "previous": "http://api.example.org/accounts/?page=2"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=4",
+            "format": "uri"
+          },
+          "previous": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=2",
+            "format": "uri"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "wallet": {
+                  "type": "integer"
+                },
+                "category": {
+                  "type": "integer"
+                },
+                "amount": {
+                  "type": "string",
+                  "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Berilmasa bugungi sana olinadi.",
+                  "format": "date"
+                }
+              },
+              "required": [
+                "amount",
+                "category",
+                "category_name",
+                "created_at",
+                "id",
+                "type",
+                "wallet",
+                "wallet_name"
+              ]
+            }
+          }
+        },
+        "required": [
+          "count",
+          "results"
+        ]
+      }
+order: 1000

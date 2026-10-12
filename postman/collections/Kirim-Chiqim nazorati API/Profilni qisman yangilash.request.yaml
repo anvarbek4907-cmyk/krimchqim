@@ -1,0 +1,46 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/auth/me/
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "stringqwsscc@gmail.com",
+      "first_name": "string",
+      "last_name": "string"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "email": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "email"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        }
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0b6g}}"
+settings: {}
+order: 2000

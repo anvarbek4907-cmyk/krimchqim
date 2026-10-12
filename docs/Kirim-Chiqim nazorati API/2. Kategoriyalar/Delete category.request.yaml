@@ -1,0 +1,9 @@
+$kind: http-request
+description: Tranzaksiyasi bo'lsa 400 qaytadi, bo'lmasa 204.
+url: "{{baseUrl}}/api/categories/{{expenseCategoryId}}/"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: pm.test('204 yoki 400', function () { pm.expect([204, 400]).to.include(pm.response.code); });
+    language: text/javascript
+order: 6000

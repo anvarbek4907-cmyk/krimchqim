@@ -1,0 +1,27 @@
+$kind: collection
+description: |-
+  Shaxsiy moliya (kirim va chiqimlar) nazorati uchun REST API.
+
+  **Autentifikatsiya:** `/api/auth/login/` orqali access va refresh token oling va `Authorization: Bearer <access>` headeri bilan yuboring. Access muddati tugasa `/api/auth/refresh/` orqali yangilang. Swagger'da **Authorize** tugmasiga faqat access tokenni kiriting.
+variables:
+  - key: baseUrl
+    value: /
+    disabled: false
+  - key: json_web_token_0b6g
+    secret: true
+    disabled: false
+  - key: json_web_token_11za
+    secret: true
+    disabled: false
+  - key: json_web_token_0jsm
+    secret: true
+    disabled: false
+  - key: json_web_token_09l7
+    secret: true
+    disabled: false
+  - key: json_web_token_0vds
+    secret: true
+    disabled: false
+  - key: json_web_token_0x0d
+    secret: true
+    disabled: false

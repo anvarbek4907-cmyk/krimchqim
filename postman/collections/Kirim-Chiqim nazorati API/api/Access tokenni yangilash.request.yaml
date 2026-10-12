@@ -1,0 +1,28 @@
+$kind: http-request
+description: Refresh token orqali yangi access (va yangi refresh) oladi. Eski refresh bekor qilinadi.
+url: http://127.0.0.1:8000/api/auth/refresh/
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "refresh": "{{json_web_token_11za}}"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "refresh": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "refresh"
+      ]
+    }
+settings: {}
+order: 6000

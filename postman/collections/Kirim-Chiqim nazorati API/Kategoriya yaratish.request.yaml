@@ -1,0 +1,43 @@
+$kind: http-request
+description: ""
+url: " http://127.0.0.1:8000/api/categories/"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "strizng",
+      "type": "incoxzme"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "income",
+            "expense"
+          ],
+          "description": "* `income` - Kirim\n* `expense` - Chiqim"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0vds}}"
+settings: {}
+order: 5000

@@ -1,0 +1,34 @@
+$kind: collection
+description: |-
+  # Kirim-Chiqim nazorati API
+
+  Shaxsiy moliya nazorati uchun Django REST API.
+
+  ## Boshlash
+  1. `baseUrl` o'zgaruvchisini tekshiring (standart: `http://127.0.0.1:8000`).
+  2. **1. Autentifikatsiya > Register** (yoki **Login**) ni ishga tushiring — access va refresh tokenlar avtomatik saqlanadi.
+  3. Tartib bilan: Kategoriyalar -> Hamyonlar -> Tranzaksiyalar -> Statistika.
+
+  ## Autentifikatsiya
+  Bearer Token: `{{access}}` (collection darajasida o'rnatilgan). Access 30 daqiqa, refresh 7 kun amal qiladi; muddati tugasa **Refresh token** so'rovini ishga tushiring.
+
+  ## Xatolar
+  - `400` — validatsiya xatosi (masalan, mablag' yetarli emas)
+  - `401` — token yo'q yoki noto'g'ri
+  - `404` — obyekt topilmadi (yoki boshqa foydalanuvchiniki)
+
+  Swagger: `{{baseUrl}}/api/docs/`  |  ReDoc: `{{baseUrl}}/api/redoc/`
+variables:
+  baseUrl: http://127.0.0.1:8000
+  access: ""
+  refresh: ""
+  incomeCategoryId: ""
+  expenseCategoryId: ""
+  walletId: ""
+  transactionId: ""
+auth:
+  - id: 2d3cda4b-30ca-427d-98fb-be478987e320
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{access}}"

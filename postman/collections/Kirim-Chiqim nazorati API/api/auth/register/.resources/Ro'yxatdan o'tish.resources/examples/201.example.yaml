@@ -1,0 +1,66 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/auth/register/"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "password": "string",
+        "password2": "string",
+        "username": "string",
+        "email": "string",
+        "first_name": "string",
+        "last_name": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "access": "string",
+        "refresh": "string",
+        "user": {
+          "email": "zelw468@jueLpWyNieGBOhKdLrJpTxEUNOmquxpOH.gf",
+          "first_name": "string",
+          "id": 4892,
+          "last_name": "string",
+          "username": "string"
+        }
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "access": {
+            "type": "string"
+          },
+          "refresh": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {},
+            "required": [
+              "email",
+              "first_name",
+              "id",
+              "last_name",
+              "username"
+            ]
+          }
+        },
+        "required": [
+          "access",
+          "refresh",
+          "user"
+        ]
+      }
+order: 1000

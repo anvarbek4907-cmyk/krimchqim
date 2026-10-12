@@ -1,0 +1,104 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/categories/?page=4398&page_size=4398&type=income"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    - key: page
+      value: "4398"
+      disabled: false
+      description: A page number within the paginated result set.
+    - key: page_size
+      value: "4398"
+      disabled: false
+      description: Number of results to return per page.
+    - key: type
+      value: income
+      disabled: false
+      description: Tur bo'yicha filtr
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "count": 123,
+        "results": [
+          {
+            "created_at": "2024-11-02T03:35:14.181Z",
+            "id": 593,
+            "name": "string",
+            "type": "income"
+          },
+          {
+            "created_at": "1953-05-05T07:47:31.604Z",
+            "id": 8362,
+            "name": "string",
+            "type": "expense"
+          }
+        ],
+        "next": "http://api.example.org/accounts/?page=4",
+        "previous": "http://api.example.org/accounts/?page=2"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=4",
+            "format": "uri"
+          },
+          "previous": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=2",
+            "format": "uri"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "income",
+                    "expense"
+                  ],
+                  "description": "* `income` - Kirim\n* `expense` - Chiqim"
+                }
+              },
+              "required": [
+                "created_at",
+                "id",
+                "name",
+                "type"
+              ]
+            }
+          }
+        },
+        "required": [
+          "count",
+          "results"
+        ]
+      }
+order: 1000

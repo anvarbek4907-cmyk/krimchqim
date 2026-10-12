@@ -1,0 +1,107 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/wallets/?page=4398&page_size=4398"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    - key: page
+      value: "4398"
+      disabled: false
+      description: A page number within the paginated result set.
+    - key: page_size
+      value: "4398"
+      disabled: false
+      description: Number of results to return per page.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "count": 123,
+        "results": [
+          {
+            "created_at": "1961-07-28T21:52:16.796Z",
+            "id": 1100,
+            "name": "string",
+            "currency": "USD",
+            "balance": "-7268."
+          },
+          {
+            "created_at": "2015-03-20T19:14:29.446Z",
+            "id": 5814,
+            "name": "string",
+            "currency": "EUR",
+            "balance": "06641981"
+          }
+        ],
+        "next": "http://api.example.org/accounts/?page=4",
+        "previous": "http://api.example.org/accounts/?page=2"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=4",
+            "format": "uri"
+          },
+          "previous": {
+            "type": "string",
+            "example": "http://api.example.org/accounts/?page=2",
+            "format": "uri"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "currency": {
+                  "type": "string",
+                  "enum": [
+                    "UZS",
+                    "USD",
+                    "EUR"
+                  ],
+                  "description": "* `UZS` - So'm\n* `USD` - Dollar\n* `EUR` - Yevro"
+                },
+                "balance": {
+                  "type": "string",
+                  "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$",
+                  "description": "Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi."
+                }
+              },
+              "required": [
+                "created_at",
+                "id",
+                "name"
+              ]
+            }
+          }
+        },
+        "required": [
+          "count",
+          "results"
+        ]
+      }
+order: 1000

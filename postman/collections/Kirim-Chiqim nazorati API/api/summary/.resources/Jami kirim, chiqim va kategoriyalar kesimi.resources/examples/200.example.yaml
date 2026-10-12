@@ -1,0 +1,112 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/summary/?date_from=1992-02-10&date_to=1992-02-10&wallet=4398"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    date_from: 1992-02-10
+    date_to: 1992-02-10
+    wallet: "4398"
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "balance": "53326875242",
+        "categories": [
+          {
+            "category": 6729,
+            "count": 6351,
+            "name": "string",
+            "total": "-802.9",
+            "type": "income"
+          },
+          {
+            "category": 2584,
+            "count": 7143,
+            "name": "string",
+            "total": "14003842435",
+            "type": "expense"
+          }
+        ],
+        "total_expense": "-634.02",
+        "total_income": "-.79",
+        "transactions_count": 6067
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "total_income": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          },
+          "total_expense": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          },
+          "balance": {
+            "type": "string",
+            "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+          },
+          "transactions_count": {
+            "type": "integer"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "income",
+                    "expense"
+                  ],
+                  "description": "* `income` - Kirim\n* `expense` - Chiqim"
+                },
+                "total": {
+                  "type": "string",
+                  "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "category",
+                "count",
+                "name",
+                "total",
+                "type"
+              ]
+            }
+          }
+        },
+        "required": [
+          "balance",
+          "categories",
+          "total_expense",
+          "total_income",
+          "transactions_count"
+        ]
+      }
+order: 1000

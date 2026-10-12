@@ -1,0 +1,24 @@
+$kind: http-request
+description: Kirim qo'shish (balans oshadi).
+url: "{{baseUrl}}/api/transactions/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "wallet": "{{walletId}}",
+      "category": "{{incomeCategoryId}}",
+      "amount": "500000.00",
+      "description": "Oylik maosh",
+      "date": "2026-10-01"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status 201', function () { pm.response.to.have.status(201); });
+      const json = pm.response.json();
+      pm.collectionVariables.set('transactionId', json.id);
+    language: text/javascript
+order: 1000

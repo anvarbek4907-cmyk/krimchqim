@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/categories/:id/"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: "4398"
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "type": "income"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "created_at": "1969-04-22T23:14:09.869Z",
+        "id": 3513,
+        "name": "string",
+        "type": "expense"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "income",
+              "expense"
+            ],
+            "description": "* `income` - Kirim\n* `expense` - Chiqim"
+          }
+        },
+        "required": [
+          "created_at",
+          "id",
+          "name",
+          "type"
+        ]
+      }
+order: 1000

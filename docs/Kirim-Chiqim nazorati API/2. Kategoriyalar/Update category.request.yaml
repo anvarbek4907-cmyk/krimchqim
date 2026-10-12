@@ -1,0 +1,17 @@
+$kind: http-request
+description: Nomni o'zgartirish.
+url: "{{baseUrl}}/api/categories/{{expenseCategoryId}}/"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Oziq-ovqat va ichimliklar"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Status 200', function () { pm.response.to.have.status(200); });
+    language: text/javascript
+order: 5000

@@ -1,0 +1,57 @@
+$kind: http-request
+description: Turi (kirim/chiqim) tanlangan **kategoriya** turidan olinadi. Hamyon balansi avtomatik o'zgaradi; chiqim balansdan oshsa 400 qaytadi.
+url: http://127.0.0.1:8000/api/transactions/
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "wallet": [
+            "Invalid pfffk \"7379\" - object does not exist."
+        ],
+        "category": [
+            "Invalid pk \"8529\" - object does not exist."
+        ],
+        "amount": [
+            "Ensure this value is greater than or equal to 0.01."
+        ]
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "wallet": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "integer"
+        },
+        "amount": {
+          "type": "string",
+          "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "date": {
+          "type": "string",
+          "description": "Berilmasa bugungi sana olinadi.",
+          "format": "date"
+        }
+      },
+      "required": [
+        "amount",
+        "category",
+        "wallet"
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0vds}}"
+settings: {}
+order: 13000

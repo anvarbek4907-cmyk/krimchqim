@@ -30,8 +30,7 @@ python manage.py runserver
 | `/api/schema/` | OpenAPI schema (yaml) |
 | `/admin/` | Admin panel |
 
-Testlar: `python manage.py test`
-
+Swagger link "http://127.0.0.1:8000/api/docs/"
 ## Postman
 
 `docs/KirimChiqim.postman_collection.json` faylini Postman'ga **Import** qiling.
@@ -80,3 +79,17 @@ accounts/   ro'yxatdan o'tish, login, profil
 finance/    modellar, serializerlar, view'lar, admin, testlar
 docs/       Postman collection
 ```
+
+
+
+
+        Login:        Parol:
+Admin:  a             1
+1-user: Asadbek      a7s7a7d7
+2-user:  Bekzod      b1e1k1z1
+
+## API hujjati
+
+To'liq OpenAPI spetsifikatsiyasi: [docs/kirim-api.yaml](docs/kirim-api.yaml)
+
+Ko'rish uchun faylni https://editor.swagger.io ga yuklang (File → Import file).

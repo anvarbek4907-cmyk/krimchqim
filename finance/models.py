@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class Category(models.Model):
-    """Kirim yoki chiqim kategoriyasi (masalan: Oylik, Oziq-ovqat)."""
+
 
     class Type(models.TextChoices):
         INCOME = "income", "Kirim"
@@ -34,7 +34,7 @@ class Category(models.Model):
 
 
 class Wallet(models.Model):
-    """Hamyon / hisob (naqd, karta va h.k.). Balans tranzaksiyalar bilan o'zgaradi."""
+
 
     class Currency(models.TextChoices):
         UZS = "UZS", "So'm"
@@ -64,8 +64,7 @@ class Wallet(models.Model):
 
 
 class Transaction(models.Model):
-    """Kirim yoki chiqim yozuvi. Turi (kirim/chiqim) kategoriyadan olinadi."""
-
+   
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="transactions"
     )

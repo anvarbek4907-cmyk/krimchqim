@@ -1,0 +1,50 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/wallets/"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "currency": "EUR",
+      "balance": "1448127638."
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "UZS",
+            "USD",
+            "EUR"
+          ],
+          "description": "* `UZS` - So'm\n* `USD` - Dollar\n* `EUR` - Yevro"
+        },
+        "balance": {
+          "type": "string",
+          "pattern": "^-?\\d{0,12}(?:\\.\\d{0,2})?$",
+          "description": "Boshlang'ich balans (faqat yaratishda). Keyin balans tranzaksiyalar orqali o'zgaradi."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Hamyon yaratish.resources/examples
+order: 2000
