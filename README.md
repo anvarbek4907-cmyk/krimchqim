@@ -89,7 +89,5 @@ Admin:  a             1
 2-user:  Bekzod      b1e1k1z1
 
 ## API hujjati
-
-To'liq OpenAPI spetsifikatsiyasi: [docs/kirim-api.yaml](docs/kirim-api.yaml)
-
-Ko'rish uchun faylni https://editor.swagger.io ga yuklang (File → Import file).
+postman link https://documenter.getpostman.com/view/57436099/2sBYHRU1yB
+Swagger link "http://127.0.0.1:8000/api/docs/"
